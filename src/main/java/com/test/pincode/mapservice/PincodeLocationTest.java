@@ -34,10 +34,11 @@ public class PincodeLocationTest  {
     @Test
     public void testCreateURL() throws Exception {
         Map<String, String> params = new HashMap<String, String>();
-        params.put("latlng", "40.714224,-73.961452");
         params.put("sensor", "true");
+        params.put("latlng", "40.714224,-73.961452");
+
         String url = pincodeLocation.createURL(params);
-        assertEquals("http://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&sensor=true&", url);
+        assertEquals("http://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&sensor=true", url);
     }
 
     @Test
