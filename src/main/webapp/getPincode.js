@@ -1,3 +1,6 @@
+
+
+
 function ajaxPinCodeRequest()
 {
     xmlHttp = new XMLHttpRequest();
