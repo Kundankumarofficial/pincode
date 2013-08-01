@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="getPincode.js" type="text/javascript"></script>
+</head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <style type="text/css">
         html { height: 100% }
@@ -55,33 +57,9 @@
             map.setCenter(pos);
 
         }
-
-        function ajaxPinCodeRequest()
-        {
-            xmlHttp = new XMLHttpRequest();
-            //var url="requestHandler.jsp?lat="+lat+"&lng="+lng;
-            var url="requestPincode?lat="+lat+"&lng="+lng;
-            alert(url);
-            if(xmlHttp) {
-                xmlHttp.open("GET",url, true);
-                xmlHttp.onreadystatechange  = ajaxPinCodeResponse;
-                xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xmlHttp.send(null);
-            }
-        }
-
-        function ajaxPinCodeResponse()
-        {
-            alert("Ready state changed: "+xmlHttp.readyState);
-            if (xmlHttp.readyState == 4) {
-                alert(":"+xmlHttp.responseText+":");
-            }
-        }
-
         google.maps.event.addDomListener(window, 'load', initialize);
 
     </script>
-</head>
 <body>
 <div id="map-canvas"/>
 </body>

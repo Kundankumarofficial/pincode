@@ -1,13 +1,43 @@
 <html>
+<head>
+    <script src="getPincode.js" type="text/javascript"></script>
+</head>
 <title> Flipkart.com </title>
 <body>
+
+<script type="text/javascript">
+    document.write("<p>" + "Your Pincode: " + pincode() + "</p>");
+    var x=document.getElementById("demo");
+    function getLocation()
+    {
+        if (navigator.geolocation)
+        {
+            navigator.geolocation.getCurrentPosition(function(position)){
+            var pos = new google.maps.LatLng(position.coords.latitude,
+                    position.coords.longitude);
+        };
+        }
+        else{x.innerHTML="Geolocation is not supported by this browser.";}
+        lat = position.lat();
+        lng = position.lng();
+        alert(lat+","+lng);
+        ajaxPinCodeRequest();
+    }
+
+</script>
+<script type="text/javascript">
+    document.write("<p>" + "Your Pincode: " + pincode() + "</p>");
+    function pincode(){
+        return "560034"
+    }
+</script>
 <a href="javascript:popup()">Select Location</a>
+
 <script type="text/javascript">
 
 function popup(){
   cuteLittleWindow = window.open("trial3.html", "littleWindow", "location=no,width=600,height=500");
 }
-
 </script>
 
 </body>
