@@ -4,4 +4,14 @@
 
 <web-app version="2.5">
   <display-name>Archetype Created Web Application</display-name>
+
+  <servlet>
+      <servlet-name>MyServlet</servlet-name>
+      <servlet-class>com.pincode.mapservice.MyServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+      <servlet-name>MyServlet</servlet-name>
+      <url-pattern>/requestPincode</url-pattern>
+  </servlet-mapping>
 </web-app>
