@@ -31,7 +31,7 @@ public class PincodeLocationTest  {
         pincodeLocation = new PincodeLocation();
     }
 
-    @Test
+   /* @Test
     public void testCreateURL() throws Exception {
         Map<String, String> params = new HashMap<String, String>();
         params.put("sensor", "true");
@@ -39,7 +39,7 @@ public class PincodeLocationTest  {
 
         String url = pincodeLocation.createURL(params);
         assertEquals("http://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&sensor=true", url);
-    }
+    }*/
 
     @Test
     public void testGetPinCode() throws Exception{
@@ -53,16 +53,16 @@ public class PincodeLocationTest  {
         System.out.println(jsonObject);
     }
 
-    @Test
+/*    @Test
     public void testMakeRequest() throws Exception
     {
         String url = "http://maps.googleapis.com/maps/api/geocode/json?sensor=false&latlng=40.71422400,-73.961452&";
         HttpResponse response = pincodeLocation.makeRequest(url);
         System.out.println(response.toString());
         assertNotNull(response);
-    }
+    } */
 
-    @Test
+    /*@Test
     public void testParseResponse() throws Exception
     {
         String url = "http://maps.googleapis.com/maps/api/geocode/json?sensor=false&latlng=40.71422400,-73.961452&";
@@ -70,6 +70,6 @@ public class PincodeLocationTest  {
         JsonObject jsonObject = pincodeLocation.parseResponse(response);
         System.out.println(jsonObject);
         assertNotNull(jsonObject);
-    }
+    } */
 
 }
