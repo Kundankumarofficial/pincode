@@ -24,7 +24,7 @@ public class MyServlet extends HttpServlet {
         double latitude = Double.parseDouble(request.getParameter("lat"));
         double longitude = Double.parseDouble(request.getParameter("lng"));
         PincodeLocation pincodeLocation = new PincodeLocation();
-        String pincode = pincodeLocation.getPinCode(latitude, longitude);
+        JsonObject pincode = pincodeLocation.getPinCode(latitude, longitude);
         PrintWriter out = response.getWriter();
         out.print(pincode);
     }

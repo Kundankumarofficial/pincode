@@ -3,6 +3,7 @@ package com.pincode.mapservice;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 import com.sun.jdi.connect.Connector;
 import org.apache.http.HttpException;
 import org.apache.http.HttpResponse;
@@ -31,7 +32,7 @@ public class PincodeLocation {
 
     }
 
-    public String getPinCode(Double latitude, Double longitude)
+    public JsonObject getPinCode(Double latitude, Double longitude)
     {
         String pincode = null;
         Map<String, String> parameters =new HashMap<String, String>();
@@ -66,7 +67,13 @@ public class PincodeLocation {
             }
         }
         System.out.println(pincode);
-        return pincode;
+
+        //convert to JsonObject
+        JsonObject jsonResponse = new JsonObject();
+        JsonPrimitive jsonPrimitive = new JsonPrimitive(pincode);
+        jsonResponse.add("pincode", jsonPrimitive);
+
+        return jsonResponse;
     }
 
     public static void main(String args[]) throws Exception

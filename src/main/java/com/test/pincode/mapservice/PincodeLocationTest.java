@@ -49,7 +49,7 @@ public class PincodeLocationTest  {
         System.out.println(pincode);
         assertEquals("11211",pincode);
         */
-        String jsonObject = pincodeLocation.getPinCode(latitude, longitude);
+        JsonObject jsonObject = pincodeLocation.getPinCode(latitude, longitude);
         System.out.println(jsonObject);
     }
 
