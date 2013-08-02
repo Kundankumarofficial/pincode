@@ -1,7 +1,7 @@
 
 
 
-function ajaxPinCodeRequest()
+function ajaxPinCodeRequest(responseHandler)
 {
     xmlHttp = new XMLHttpRequest();
     //var url="requestHandler.jsp?lat="+lat+"&lng="+lng;
@@ -9,7 +9,7 @@ function ajaxPinCodeRequest()
     alert(url);
     if(xmlHttp) {
         xmlHttp.open("GET",url, true);
-        xmlHttp.onreadystatechange  = ajaxPinCodeResponse;
+        xmlHttp.onreadystatechange  = responseHandler;
         xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xmlHttp.send(null);
     }

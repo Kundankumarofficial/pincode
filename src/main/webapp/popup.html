@@ -4,27 +4,52 @@
 </head>
 <title> Flipkart.com </title>
 <body>
-
-<script type="text/javascript">
-    document.write("<p>" + "Your Pincode: " + pincode() + "</p>");
+<p id="demo"></p>
+<button onclick="getLocation()">Get My Pincode</button>
+<script>
     var x=document.getElementById("demo");
     function getLocation()
     {
         if (navigator.geolocation)
         {
-            navigator.geolocation.getCurrentPosition(function(position)){
-            var pos = new google.maps.LatLng(position.coords.latitude,
-                    position.coords.longitude);
-        };
+            navigator.geolocation.getCurrentPosition(function showPosition(position)
+            {
+                x.innerHTML="Latitude: " + position.coords.latitude +
+                        "<br>Longitude: " + position.coords.longitude;
+            });
         }
         else{x.innerHTML="Geolocation is not supported by this browser.";}
-        lat = position.lat();
-        lng = position.lng();
-        alert(lat+","+lng);
-        ajaxPinCodeRequest();
     }
 
 </script>
+<!--
+<p id="demo">Click the button to get your coordinates:</p>
+<button onclick= "javascript:getLocation()">Get My Pincode </button>
+<script type="text/javascript">
+   // document.write("<p>" + "Your Pincode: " + pincode() + "</p>");
+    var x=document.getElementById("demo");
+    function getLocation()
+    {
+        if (navigator.geolocation)
+        {
+            navigator.geolocation.getCurrentPosition(function showPosition(position)
+            {
+            var pos = new google.maps.LatLng(position.coords.latitude,
+                    position.coords.longitude);
+            lat = position.lat();
+            lng = position.lng();
+            x.innerHTML="Latitude: " + position.coords.latitude +
+                    "<br>Longitude: " + position.coords.longitude;
+        });
+        }
+        else{x.innerHTML="Geolocation is not supported by this browser.";}
+
+        //alert(lat+","+lng);
+        //ajaxPinCodeRequest();
+    }
+
+</script> ***/  --->
+
 <script type="text/javascript">
     document.write("<p>" + "Your Pincode: " + pincode() + "</p>");
     function pincode(){
