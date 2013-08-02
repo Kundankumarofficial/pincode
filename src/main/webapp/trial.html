@@ -19,6 +19,7 @@
         var geocoder = new google.maps.Geocoder();
         var markerStatus;
         var address;
+        var pincode;
         function initialize() {
             myMap = new google.maps.Map(document.getElementById('map-canvas'), {
                 mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -71,10 +72,29 @@
                 if (responses && responses.length > 0) {
                     address=responses[0].formatted_address;
                     alert(address);
-                     } else {
+                    //alert(responses[0].toString());
+                    //alert(JSON.stringify(responses[0]));
+                    getPinCode(responses);
+                    alert(pincode);
+                } else {
                     address="Cannot determine address at this location.";
                 }
             });
+        }
+
+        function getPinCode(response)
+        {
+            pincode = null;
+            var addressComponents = response[0].address_components;
+            for(var i=0; i<addressComponents.length; i++)
+            {
+                var types = addressComponents[i].types;
+                for(var j=0; j<types.length; j++)
+                {
+                    if(types[j]=="postal_code")
+                        pincode = addressComponents[i].long_name;
+                }
+            }
         }
 
         function updateMarkerPosition(position)
@@ -91,18 +111,18 @@
                 myMap.panTo(position);
                 updateMarkerPosition(marker.position);
                 geocodePosition(marker.position);
-                 google.maps.event.addListener(marker, 'drag', function(e) {
-                updateMarkerPosition(marker.getPosition());
-            });
+                google.maps.event.addListener(marker, 'drag', function(e) {
+                    updateMarkerPosition(marker.getPosition());
+                });
 
-            google.maps.event.addListener(marker, 'dragend', function(e) {
-                geocodePosition(marker.getPosition());
+                google.maps.event.addListener(marker, 'dragend', function(e) {
+                    geocodePosition(marker.getPosition());
                 });
             }
             else
             {
                 marker.setPosition(position);
-        geocodePosition(marker.position);
+                geocodePosition(marker.position);
             }
         }
 
