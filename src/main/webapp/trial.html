@@ -18,7 +18,6 @@
         var myMap;
         var geocoder = new google.maps.Geocoder();
         var markerStatus;
-        var info;
         var address;
         function initialize() {
             myMap = new google.maps.Map(document.getElementById('map-canvas'), {
@@ -70,10 +69,10 @@
                 latLng: pos
             }, function(responses) {
                 if (responses && responses.length > 0) {
-                    //updateMarkerAddress(responses[0].formatted_address);
-                    markerStatus = "Address got "+responses[0].formatted_address;
-                } else {
-                    markerStatus = "Cannot determine address at this location.";
+                    address=responses[0].formatted_address;
+                    alert(address);
+                     } else {
+                    address="Cannot determine address at this location.";
                 }
             });
         }
@@ -86,15 +85,18 @@
 
         function placeUserMarker(position)
         {
-            //var icon = new google.maps.MarkerImage("icons/"+color+"-dot.png");   http:// google.com/mapfiles/ms/micons
             var icon = new google.maps.MarkerImage("http://google.com/mapfiles/ms/micons/green-dot.png");
             if(!marker){
                 marker = new google.maps.Marker({position :position, icon:icon, map:myMap, draggable: true});
-                //marker.setIcon(icon);
                 myMap.panTo(position);
                 updateMarkerPosition(marker.position);
                 geocodePosition(marker.position);
-                google.maps.event.addListener(marker, 'dragend', function(e) {
+                 google.maps.event.addListener(marker, 'drag', function(e) {
+                updateMarkerPosition(marker.getPosition());
+            });
+
+            google.maps.event.addListener(marker, 'dragend', function(e) {
+                geocodePosition(marker.getPosition());
                 });
             }
             else
