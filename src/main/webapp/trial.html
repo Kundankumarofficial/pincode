@@ -65,6 +65,25 @@
             });
         }
 
+        function geocodePosition(pos) {
+            geocoder.geocode({
+                latLng: pos
+            }, function(responses) {
+                if (responses && responses.length > 0) {
+                    //updateMarkerAddress(responses[0].formatted_address);
+                    markerStatus = "Address got "+responses[0].formatted_address;
+                } else {
+                    markerStatus = "Cannot determine address at this location.";
+                }
+            });
+        }
+
+        function updateMarkerPosition(position)
+        {
+            lat = position.lat();
+            lng = position.lng();
+        }
+
         function placeUserMarker(position)
         {
             //var icon = new google.maps.MarkerImage("icons/"+color+"-dot.png");   http:// google.com/mapfiles/ms/micons
@@ -73,36 +92,15 @@
                 marker = new google.maps.Marker({position :position, icon:icon, map:myMap, draggable: true});
                 //marker.setIcon(icon);
                 myMap.panTo(position);
+                updateMarkerPosition(marker.position);
+                geocodePosition(marker.position);
                 google.maps.event.addListener(marker, 'dragend', function(e) {
-                    lat = marker.position.lat();
-                    lng = marker.position.lng();
-                    alert(lat+","+lng);
-                    geocodePosition(e.latLng);
-                    alert(markerStatus);
                 });
             }
             else
             {
                 marker.setPosition(position);
             }
-            lat = marker.position.lat();
-            lng = marker.position.lng();
-            alert(lat+","+lng);
-            geocodePosition(e.latLng);
-            alert(markerStatus);
-        }
-
-        function geocodePosition(pos) {
-            geocoder.geocode({
-                latLng: pos
-            }, function(responses) {
-                if (responses && responses.length > 0) {
-                    //updateMarkerAddress(responses[0].formatted_address);
-                    markerStatus = "Address got";
-                } else {
-                    markerStatus = "Cannot determine address at this location.";
-                }
-            });
         }
 
         google.maps.event.addDomListener(window, 'load', initialize);
