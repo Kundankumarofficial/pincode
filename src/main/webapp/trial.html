@@ -20,6 +20,7 @@
         var markerStatus;
         var address;
         var pincode;
+        var infowindow;
         function initialize() {
             myMap = new google.maps.Map(document.getElementById('map-canvas'), {
                 mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -63,6 +64,7 @@
             google.maps.event.addListener(myMap, 'click', function(e){
                 placeUserMarker(e.latLng);
             });
+             infowindow = new google.maps.InfoWindow();
         }
 
         function geocodePosition(pos) {
@@ -71,11 +73,9 @@
             }, function(responses) {
                 if (responses && responses.length > 0) {
                     address=responses[0].formatted_address;
-                    alert(address);
-                    //alert(responses[0].toString());
-                    //alert(JSON.stringify(responses[0]));
                     getPinCode(responses);
-                    alert(pincode);
+                    infowindow.setContent(address);
+
                 } else {
                     address="Cannot determine address at this location.";
                 }
@@ -113,6 +113,7 @@
                 geocodePosition(marker.position);
                 google.maps.event.addListener(marker, 'drag', function(e) {
                     updateMarkerPosition(marker.getPosition());
+            infowindow.open(myMap,marker);
                 });
 
                 google.maps.event.addListener(marker, 'dragend', function(e) {
@@ -124,6 +125,9 @@
                 marker.setPosition(position);
                 geocodePosition(marker.position);
             }
+        google.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(myMap,marker);
+        });
         }
 
         google.maps.event.addDomListener(window, 'load', initialize);
